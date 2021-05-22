@@ -49,11 +49,6 @@ export default {
       ]
     };
   },
-  computed: {
-    opCount() {
-      return this.count;
-    }
-  },
   methods: {
     sortFunc() {
       return this.restaurants.slice().sort(function(a, b) {
