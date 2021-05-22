@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
     <h1 class="mt-8 my-6 text-2xl text-center font-bold">달력</h1>
     <section class="text-center">
       <p class="p-2 text-center font-bold" style="width: 14.28%">

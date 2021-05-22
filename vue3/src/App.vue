@@ -1,20 +1,19 @@
 <template>
 <Header />
 
-  <div class="w-full flex"></div>
-<!-- <Restaurants /> -->
-<Calendar />
+<router-view></router-view>
+
 
 </template>
 
 <script>
-import Restaurants from "./pages/Restaurants";
-import Header from "./components/AppHeader"; import Calendar from
-"./pages/Calendar";
+import Header from "./components/AppHeader";
+
 
 
 export default {
-components: { Restaurants, Header, Calendar }
+components: { Header }
+
 
 };
 </script>
