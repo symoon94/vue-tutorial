@@ -16,7 +16,9 @@
 <script>
 export default {
 data(){ return { navItems: [ {title: "맛집", to:"/restaurants"},{title: "달력",
-to:"/calendar"},{title: "마크다운", to:"/markdown"} ], } },
+to:"/calendar"},{title: "마크다운", to:"/markdown"},{title: "슬라이더",
+to:"/slider"} ], } },
+
 
 
 };
