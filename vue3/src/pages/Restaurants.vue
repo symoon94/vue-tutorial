@@ -49,6 +49,7 @@ export default {
       ]
     };
   },
+  computed: {},
   methods: {
     sortFunc() {
       return this.restaurants.slice().sort(function(a, b) {

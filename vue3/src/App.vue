@@ -1,20 +1,19 @@
 <template>
-<Header />
+  <Header @open-login-modal="isLoginOpen = true" />
+  <div class=""><router-view></router-view></div>
 
-<router-view></router-view>
-
-
+  <LoginModal v-if="isLoginOpen" @close-login-modal="isLoginOpen = false" />
 </template>
 
 <script>
 import Header from "./components/AppHeader";
-
-
+import LoginModal from "./components/LoginModal";
 
 export default {
-components: { Header }
-
-
+  data() {
+    return { isLoginOpen: false };
+  },
+  components: { Header, LoginModal }
 };
 </script>
 
