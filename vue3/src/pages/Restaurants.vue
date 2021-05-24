@@ -7,6 +7,7 @@
           class="border px-1 mx-2 rounded-md"
           v-model="newRestaurant"
           placeholder="맛집을 입력하쇼."
+          ref="restaurantInput"
         />
         <button
           class="rounded-md bg-gradient-to-b from-yellow-500 to-red-500 text-white px-2"
@@ -49,7 +50,9 @@ export default {
       ]
     };
   },
-  computed: {},
+  mounted() {
+    this.$refs.restaurantInput.focus();
+  },
   methods: {
     sortFunc() {
       return this.restaurants.slice().sort(function(a, b) {

@@ -11,13 +11,19 @@ md:inline-block"
       :to="item.to"
       >{{ item.title }}</router-link
     >
-    <button class="mx-2" @click="$emit('open-login-modal')">Login</button>
-    <button class="mx-2">Logout</button>
+    <button v-if="!isLoggedIn" class="mx-2" @click="$emit('open-login-modal')">
+      Login
+    </button>
+    <button v-else class="mx-2" @click="logout">Logout</button>
   </nav>
 </template>
 
 <script>
+import firebase from "../utilities/firebase";
+
+
 export default {
+  props: { isLoggedIn: { type: Boolean, required: true } },
   data() {
     return {
       navItems: [
@@ -27,6 +33,11 @@ export default {
         { title: "슬라이더", to: "/slider" }
       ]
     };
+  },
+  methods: {
+    logout() {
+      firebase.auth().signOut();
+    }
   }
 };
 </script>

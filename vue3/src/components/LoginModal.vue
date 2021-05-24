@@ -1,12 +1,14 @@
 <template>
   <section
-    @click="$emit('close-login-modal')"
+    @click="close()"
     class="h-screen w-screen bg-gray-500 fixed top-0 opacity-50 z-20"
   ></section>
   <div class="absolute inset-0">
     <div class="flex h-full">
-      <div class="m-auto w-1/3 h-3/6 bg-white p-2 rounded shadow-md z-30">
+      <div class="m-auto w-1/3 h-4/6 bg-white p-2 rounded shadow-md z-30">
         <div class="m-1 text-2xl text-center font-bold"><h1>Login</h1></div>
+        <GoogleLogin @close-login-modal-from-google="close" />
+        <p class="text-center">Or</p>
         <form @submit.prevent="submit">
           <div class="p-2">
             <label>Email</label>
@@ -15,6 +17,7 @@
               type="email"
               placeholder="email"
               v-model="email"
+              ref="emailInput"
             />
           </div>
 
@@ -43,14 +46,36 @@
 </template>
 
 <script>
+import firebase from "../utilities/firebase";
+import GoogleLogin from "./Login/GoogleLogin";
+
 export default {
+  components: { GoogleLogin },
   data() {
     return {
-      form: {
-        email: "user@gmail.com",
-        password: "password"
-      }
+      email: "user@gmail.com",
+      password: "password"
     };
+  },
+  mounted() {
+    this.$refs.emailInput.focus();
+  },
+  methods: {
+    submit() {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.email, this.password)
+        .then(res => {
+          console.log(res);
+          this.close();
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+    close() {
+      this.$emit("close-login-modal");
+    }
   }
 };
 </script>

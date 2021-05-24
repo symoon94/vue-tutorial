@@ -7,6 +7,7 @@
           class="w-full h-full"
           :value="text"
           @input="update"
+          ref="mdTextarea"
         ></textarea>
       </article>
       <article class="w-1/2 border bg-gray-100" v-html="markedText"></article>
@@ -19,6 +20,9 @@ import marked from "marked";
 export default {
   data() {
     return { text: "", timeout: "" };
+  },
+  mounted() {
+    this.$refs.mdTextarea.focus();
   },
   methods: {
     debounce(func, wait = 1000) {
