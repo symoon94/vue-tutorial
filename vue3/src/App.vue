@@ -1,7 +1,6 @@
 <template>
   <Header :isLoggedIn="isLoggedIn" @open-login-modal="isLoginOpen = true" />
   <div class=""><router-view></router-view></div>
-
   <LoginModal v-if="isLoginOpen" @close-login-modal="isLoginOpen = false" />
 </template>
 

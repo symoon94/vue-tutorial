@@ -4,6 +4,7 @@ import Restaurants from "./pages/Restaurants";
 import Calendar from "./pages/Calendar";
 import Markdown from "./pages/Markdown";
 import Slider from "./pages/Slider";
+import Calculator from "./pages/Calculator";
 
 const routes = [
   { path: "/", component: Home },
@@ -11,6 +12,7 @@ const routes = [
   { path: "/restaurants", component: Restaurants },
   { path: "/markdown", component: Markdown },
   { path: "/slider", component: Slider },
+  { path: "/calculator", component: Calculator },
 ];
 
 const router = createRouter({ history: createWebHistory(), routes });
