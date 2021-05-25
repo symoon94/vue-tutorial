@@ -5,9 +5,11 @@ import Calendar from "./pages/Calendar";
 import Markdown from "./pages/Markdown";
 import Slider from "./pages/Slider";
 import Calculator from "./pages/Calculator";
+import Members from "./pages/Members";
 
 const routes = [
   { path: "/", component: Home },
+  { path: "/members", component: Members },
   { path: "/calendar", component: Calendar },
   { path: "/restaurants", component: Restaurants },
   { path: "/markdown", component: Markdown },

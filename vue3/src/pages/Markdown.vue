@@ -17,18 +17,17 @@
 
 <script>
 import marked from "marked";
+import useDebounce from "../utilities/composition/useDebounce";
+
 export default {
   data() {
-    return { text: "", timeout: "" };
+    return { text: "", debounce: "" };
   },
   mounted() {
     this.$refs.mdTextarea.focus();
+    this.debounce = useDebounce();
   },
   methods: {
-    debounce(func, wait = 1000) {
-      clearTimeout(this.timeout);
-      this.timeout = setTimeout(func, wait);
-    },
     update(e) {
       const task = () => (this.text = e.target.value);
       this.debounce(task, 500);
