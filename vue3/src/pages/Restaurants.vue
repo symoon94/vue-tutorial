@@ -11,7 +11,6 @@
         />
         <button
           class="rounded-md bg-gradient-to-b from-yellow-500 to-red-500 text-white px-2"
-          :disabled="isActive"
           type="submit"
         >
           추가
@@ -36,51 +35,64 @@
 </template>
 
 <script>
+import { onMounted, ref } from "vue";
+
 export default {
-  data() {
-    return {
-      isShowing: true,
-      newRestaurant: "",
-      isActive: false,
-      count: 3,
-      restaurants: [
-        { id: 0, name: "백종원 쌈밥집", numRating: 3, rating: 3.5 },
-        { id: 1, name: "두찜", numRating: 2, rating: 4.2 },
-        { id: 2, name: "이차돌", numRating: 3, rating: 2 }
-      ]
-    };
-  },
-  mounted() {
-    this.$refs.restaurantInput.focus();
-  },
-  methods: {
-    sortFunc() {
-      return this.restaurants.slice().sort(function(a, b) {
+  setup() {
+    const restaurantInput = ref("");
+    const newRestaurant = ref("");
+    const restaurants = ref([
+      { id: 0, name: "백종원 쌈밥집", numRating: 3, rating: 3.5 },
+      { id: 1, name: "두찜", numRating: 2, rating: 4.2 },
+      { id: 2, name: "이차돌", numRating: 3, rating: 2 }
+    ]);
+    const count = ref(3);
+
+    onMounted(() => {
+      restaurantInput.value.focus();
+    });
+
+    function sortFunc() {
+      return restaurants.value.slice().sort(function(a, b) {
         return a.rating < b.rating ? 1 : -1;
       });
-    },
-    addRestaurant() {
-      this.count += 1;
-      this.restaurants.push({
-        id: this.count,
-        name: this.newRestaurant.trim(),
+    }
+
+    function addRestaurant() {
+      count.value += 1;
+      restaurants.value.push({
+        id: count.value,
+        name: newRestaurant.value.trim(),
         numRating: 0,
         rating: 0
       });
-      this.newRestaurant = "";
-    },
-    editRating(id) {
-      for (var i = 0; i < this.restaurants.length; i++) {
-        if (this.restaurants[i].id == id) {
-          this.restaurants[i].numRating += 1;
+      newRestaurant.value = "";
+    }
+
+    function editRating(id) {
+      for (var i = 0; i < restaurants.value.length; i++) {
+        if (restaurants.value[i].id == id) {
+          restaurants.value[i].numRating += 1;
         }
       }
-    },
-    remove(id) {
-      this.restaurants = this.restaurants.filter(
+    }
+
+    function remove(id) {
+      restaurants.value = restaurants.value.filter(
         restaurant => restaurant.id != id
       );
     }
+
+    return {
+      restaurantInput,
+      newRestaurant,
+      restaurants,
+      count,
+      sortFunc,
+      addRestaurant,
+      editRating,
+      remove
+    };
   }
 };
 </script>
