@@ -31,7 +31,8 @@ export default {
         { title: "달력", to: "/calendar" },
         { title: "마크다운", to: "/markdown" },
         { title: "슬라이더", to: "/slider" },
-        { title: "계산기", to: "/calculator" }
+        { title: "계산기", to: "/calculator" },
+         { title: "채팅", to: "/chat" }
       ]
     };
   },

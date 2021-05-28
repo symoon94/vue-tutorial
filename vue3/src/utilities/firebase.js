@@ -1,5 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/auth";
+import "firebase/database";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -13,4 +14,7 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-export default firebase; 
+const db = firebase.database();
+export const chatsRef = db.ref("chats");
+
+export default firebase;
