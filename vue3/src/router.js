@@ -15,7 +15,7 @@ const routes = [
   { path: "/restaurants", component: Restaurants },
   { path: "/markdown", component: Markdown },
   { path: "/slider", component: Slider },
-  { path: "/calculator", component: Chat },
+  { path: "/calculator", component: Calculator },
   { path: "/chat", component: Chat },
 ];
 

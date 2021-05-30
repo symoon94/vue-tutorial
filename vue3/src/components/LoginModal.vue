@@ -1,6 +1,6 @@
 <template>
   <section
-    @click="close()"
+    @click="close"
     class="h-screen w-screen bg-gray-500 fixed top-0 opacity-50 z-20"
   ></section>
   <div class="absolute inset-0">
@@ -36,7 +36,7 @@
               type="submit"
               class="my-3 w-full rounded shadow-md bg-blue-600 text-white p-2"
             >
-              Login
+              <span v-if="!isLoading">Login</span> <span v-else>⌛</span>
             </button>
           </div>
         </form>
@@ -47,14 +47,20 @@
 
 <script>
 import firebase from "../utilities/firebase";
-import GoogleLogin from "./Login/GoogleLogin";
+import GoogleLogin from "../components/Login/GoogleLogin";
 
 export default {
   components: { GoogleLogin },
+  computed: {
+    isLoginOpen() {
+      return this.$store.state.isLoginOpen;
+    }
+  },
   data() {
     return {
       email: "user@gmail.com",
-      password: "password"
+      password: "password",
+      isLoading: false
     };
   },
   mounted() {
@@ -62,15 +68,19 @@ export default {
   },
   methods: {
     submit() {
+      this.isLoading = true;
       firebase
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
-        .then(res => {
-          console.log(res);
+        .then(() => {
+          this.email = "";
+          this.password = "";
+          this.isLoading = false;
           this.close();
         })
         .catch(e => {
           console.log(e);
+          this.isLoading = false;
         });
     },
     close() {
